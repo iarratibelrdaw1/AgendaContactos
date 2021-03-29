@@ -1,5 +1,11 @@
+package ut7.agenda.test;
 import java.time.LocalDate;
 import java.util.Map;
+
+import ut7.agenda.io.AgendaIO;
+import ut7.agenda.modelo.AgendaContactos;
+import ut7.agenda.modelo.Contacto;
+import ut7.agenda.modelo.Personal;
 
 public class TestAgenda {
 

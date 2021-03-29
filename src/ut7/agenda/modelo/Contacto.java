@@ -1,4 +1,6 @@
-public class Contacto {
+package ut7.agenda.modelo;
+
+public abstract class Contacto  {
 	private String nombre;
 	private String apellidos;
 	private String telefono;
