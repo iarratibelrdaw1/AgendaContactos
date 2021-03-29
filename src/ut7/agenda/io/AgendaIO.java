@@ -1,6 +1,6 @@
 package ut7.agenda.io;
-import ut7.agenda.modelo.AgendaContactos;
-import ut7.agenda.modelo.Contacto;
+
+import ut7.agenda.modelo.*;
 
 /**
  * Utilidades para cargar la agenda
@@ -10,10 +10,48 @@ public class AgendaIO {
 	public static void importar(AgendaContactos agenda) {
 
 	}
-
+	
+	/**
+	 * De una linea crea un objeto dependiendo de que tipo de contacto sea.
+	 * Los datos vienen separados por comas y tienen espacios al principio y al final.
+	 * @param String linea (la linea con los datos)
+	 */
 	private static Contacto parsearLinea(String linea) {
+		String[] datos = linea.split(",");
+		String tipo = datos[0].trim();
+		String nombre = datos[1].trim();
+		String apellidos = datos[2].trim();
+		String tel = datos[3].trim();
+		String email = datos[4].trim();
+		if(Integer.parseInt(tipo) == 1) {
+			String empresa = datos[5].trim();
+			Contacto prof = new Profesional(nombre, apellidos, tel, email, empresa);
+		}
+		if(Integer.parseInt(tipo) == 2) {
+			String fecha = datos[5].trim();
+			Relacion rel;
+			if(datos[6].equalsIgnoreCase("PADRE")) {
+				rel = Relacion.PADRE;
+			}
+			if(datos[6].equalsIgnoreCase("MADRE")) {
+				rel = Relacion.MADRE;
+			}
+			if(datos[6].equalsIgnoreCase("AMIGOS")) {
+				rel = Relacion.AMIGOS;
+			}
+			if(datos[6].equalsIgnoreCase("PAREJA")) {
+				rel = Relacion.PAREJA;
+			}
+			if(datos[6].equalsIgnoreCase("HIJO")) {
+				rel = Relacion.HIJO;
+			}
+			if(datos[6].equalsIgnoreCase("HIJA")) {
+				rel = Relacion.HIJA;
+			}
+			Contacto pers = new Personal(nombre, apellidos, tel, email, fecha, rel);
+			return pers;
+		}
 		return null;
-
 	}
 
 	/**
