@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
  * Clase Personal, que hereda de Contacto añadiendo la fecha de nacimiento
  * y la relación.
  * 
- * @author Alex Calderón
+ * @author Alex Calderón, Irune Arratibel, Daniel Jiménez
  * @version 1.0
  *
  */
