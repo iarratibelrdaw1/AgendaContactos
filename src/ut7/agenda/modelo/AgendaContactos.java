@@ -90,16 +90,28 @@ public class AgendaContactos {
 	public void personalesPorRelacion() {
 
 		TreeMap<Relacion,List<Personal>> resul = new TreeMap<Relacion,List<Personal>>();
-		List<Personal> listaPadre = 
 		resul.put(Relacion.PADRE, new ArrayList<Personal>());
+		resul.put(Relacion.MADRE, new ArrayList<Personal>());
+		resul.put(Relacion.AMIGOS, new ArrayList<Personal>());
+		resul.put(Relacion.PAREJA, new ArrayList<Personal>());
+		resul.put(Relacion.HIJO, new ArrayList<Personal>());
+		resul.put(Relacion.HIJA, new ArrayList<Personal>());
 		for(char clave: agenda.keySet()){
 			for(Contacto lista: agenda.get(clave)) {
 				if(lista instanceof Personal) {
 					switch(((Personal) lista).getRel()) {
 						case PADRE:
 							resul.get(Relacion.PADRE).add((Personal) lista);
-						
-					
+						case MADRE:
+							resul.get(Relacion.MADRE).add((Personal) lista);
+						case AMIGOS:
+							resul.get(Relacion.AMIGOS).add((Personal) lista);
+						case PAREJA:
+							resul.get(Relacion.PAREJA).add((Personal) lista);
+						case HIJO:
+							resul.get(Relacion.HIJO).add((Personal) lista);
+						case HIJA:
+							resul.get(Relacion.HIJA).add((Personal) lista);
 					}
 				}
 				
@@ -128,7 +140,7 @@ public class AgendaContactos {
 			}
 		}
 		Collections.sort(ord, new Comparator<Personal>() {
-				public int compare(Personal p1, Personal p2) {
+				public int compare(Personal p1, Personal p2)  {
 					if(p1.getFecha_nac().compareTo(p2.getFecha_nac()) > 0) {
 						return 1;
 					}
@@ -138,7 +150,7 @@ public class AgendaContactos {
 					return 0;
 				}
 			
-			});
+		});
 
 			
 		return ord;
