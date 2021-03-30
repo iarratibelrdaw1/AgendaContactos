@@ -95,7 +95,7 @@ public class Personal extends Contacto{
 	 */
 	@Override
 	public String toString() {
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd MMM. YYYY");
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd MMM YYYY");
 		
 		String resul = super.toString();
 		resul += "Fecha nacimiento: " + dtf.format(fecha_nac) + "\nRelacion: " + rel + "\n";
