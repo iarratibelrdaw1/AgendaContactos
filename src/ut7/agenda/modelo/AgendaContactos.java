@@ -19,6 +19,9 @@ import java.util.TreeMap;
 public class AgendaContactos {
 	private Map<Character, Set<Contacto>> agenda;
 
+	/**
+	 * Constructor de AgendaContactos
+	 */
 	public AgendaContactos() {
 		agenda = new TreeMap<Character, Set<Contacto>>();
 	}
@@ -57,7 +60,14 @@ public class AgendaContactos {
 		return null;
 	}
 
+	/**
+	 * Devuelve un ArrayList con todos los contactos que incluyen 
+	 * el texto ,introducido como parámetro, en su nombre o apellidos.	
+	 * @param texto
+	 * @return ArrayList<Contacto> 
+	 */
 	public List<Contacto> buscarContactos(String texto) {
+		
 		ArrayList <Contacto> resul = new ArrayList<Contacto>();
 		for(char clave: agenda.keySet()){
 			for(Contacto lista: agenda.get(clave)) {
@@ -75,6 +85,11 @@ public class AgendaContactos {
 		return null;
 	}
 
+	/**
+	 * Devuelve un ArrayList con los contactos 
+	 * que hay que felicitar
+	 * @return ArrayList <Personal>
+	 */
 	public List<Personal> felicitar() {
 		ArrayList <Personal> resul = new ArrayList<Personal>();
 		for(char clave: agenda.keySet()){
@@ -87,15 +102,24 @@ public class AgendaContactos {
 		return resul;
 	}
 
+	/**
+	 * Devuelve TreeMap en el que aparecen los contactos 
+	 * personales  organizados de forma que la clave en el nuevo
+	 * map es la relación  y el valor asociado, un ArrayList
+	 * de cadenas con los apellidos y nombre de todos los
+	 * contactos personales que hay en la agenda
+	 */
 	public void personalesPorRelacion() {
 
 		TreeMap<Relacion,List<Personal>> resul = new TreeMap<Relacion,List<Personal>>();
+		
 		resul.put(Relacion.PADRE, new ArrayList<Personal>());
 		resul.put(Relacion.MADRE, new ArrayList<Personal>());
 		resul.put(Relacion.AMIGOS, new ArrayList<Personal>());
 		resul.put(Relacion.PAREJA, new ArrayList<Personal>());
 		resul.put(Relacion.HIJO, new ArrayList<Personal>());
 		resul.put(Relacion.HIJA, new ArrayList<Personal>());
+		
 		for(char clave: agenda.keySet()){
 			for(Contacto lista: agenda.get(clave)) {
 				if(lista instanceof Personal) {
