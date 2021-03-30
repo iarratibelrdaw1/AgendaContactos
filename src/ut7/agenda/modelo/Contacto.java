@@ -1,6 +1,7 @@
 package ut7.agenda.modelo;
 
-public abstract class Contacto  {
+public abstract class Contacto implements Comparable<Contacto>{
+
 	private String nombre;
 	private String apellidos;
 	private String telefono;
@@ -45,10 +46,37 @@ public abstract class Contacto  {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	public abstract String getFirmaEmail();
+	
+	// CompareTo
+	@Override
+	public int compareTo(Contacto o) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	// Equals
+	@Override
+	public boolean equals(Object obj)
+	 {
+	 if ( this == obj) {
+	return true;
+	 }
+	 if ( obj == null) {
+	return false;
+	 }
+	 if(this.getClass() != obj.getClass()) {
+	return false;
+	 }
+	 Contacto p = (Contacto) obj;
+	 return p.getApellidos().equalsIgnoreCase(apellidos) && p.getNombre().equalsIgnoreCase(nombre) && p.getEmail().equalsIgnoreCase(email);
+	 }
 
+	// HashCode
 	@Override
 	public int hashCode() {
-		return email.hashCode();
+		return nombre.hashCode() + apellidos.hashCode() + telefono.hashCode() + email.hashCode() * 11;
 
 	}
 
