@@ -7,12 +7,20 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 
+/**
+ * Clase AgendaContactos
+ * 
+ * @author Alex Calderón, Irune Arratibel, Daniel Jiménez
+ * @version 1.0
+ *
+ */
 public class AgendaContactos {
 	private Map<Character, Set<Contacto>> agenda;
 
 	public AgendaContactos() {
-
+		agenda = new TreeMap<Character, Set<Contacto>>();
 	}
 	
 	/**
@@ -61,8 +69,15 @@ public class AgendaContactos {
 	}
 
 	public List<Personal> felicitar() {
+		ArrayList <Personal> resul = new ArrayList();
+		for(char clave: agenda.keySet()){
+			for(Contacto lista: agenda.get(clave)) {
+				if(lista instanceof Personal && ((Personal) lista).esCumpleaños())
+					resul.add((Personal)lista);
+			}
+		}  
 
-		return null;
+		return resul;
 	}
 
 	public void personalesPorRelacion() {
