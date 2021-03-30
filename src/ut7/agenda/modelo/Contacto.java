@@ -94,7 +94,7 @@ public abstract class Contacto implements Comparable<Contacto>{
 	 */
 	@Override
 	public String toString() {
-		return getApellidos() + ", " + getNombre() + " (" + getClass() + ")" + "\n" +
+		return getApellidos() + ", " + getNombre() + " (" + getClass().getSimpleName().toUpperCase() + ")" + "\n" +
 			   "Tfno: " + getTelefono() + "   |    email: " + getEmail() + "\n";
 	}
 	
