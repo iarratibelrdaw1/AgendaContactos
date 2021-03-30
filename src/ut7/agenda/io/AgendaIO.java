@@ -20,6 +20,7 @@ public class AgendaIO {
 	 * De una linea crea un objeto dependiendo de que tipo de contacto sea.
 	 * Los datos vienen separados por comas y tienen espacios al principio y al final.
 	 * @param String linea (la linea con los datos)
+	 * @return Contacto 
 	 */
 	private static Contacto parsearLinea(String linea) {
 		String[] datos = linea.split(",");
@@ -31,10 +32,11 @@ public class AgendaIO {
 		if(Integer.parseInt(tipo) == 1) {
 			String empresa = datos[5].trim();
 			Contacto prof = new Profesional(nombre, apellidos, tel, email, empresa);
+			return prof;
 		}
 		if(Integer.parseInt(tipo) == 2) {
 			String fecha = datos[5].trim();
-			Relacion rel;
+			Relacion rel = null;
 			if(datos[6].equalsIgnoreCase("PADRE")) {
 				rel = Relacion.PADRE;
 			}
