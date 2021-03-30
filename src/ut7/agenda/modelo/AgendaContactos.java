@@ -58,8 +58,15 @@ public class AgendaContactos {
 	}
 
 	public List<Contacto> buscarContactos(String texto) {
-
-		return null;
+		ArrayList <Contacto> resul = new ArrayList<Contacto>();
+		for(char clave: agenda.keySet()){
+			for(Contacto lista: agenda.get(clave)) {
+				if(lista.getNombre().contains(texto) || lista.getApellidos().contains(texto) )
+					resul.add(lista);
+			}
+		}  
+		
+		return resul;
 
 	}
 
@@ -69,7 +76,7 @@ public class AgendaContactos {
 	}
 
 	public List<Personal> felicitar() {
-		ArrayList <Personal> resul = new ArrayList();
+		ArrayList <Personal> resul = new ArrayList<Personal>();
 		for(char clave: agenda.keySet()){
 			for(Contacto lista: agenda.get(clave)) {
 				if(lista instanceof Personal && ((Personal) lista).esCumpleaños())
@@ -82,6 +89,25 @@ public class AgendaContactos {
 
 	public void personalesPorRelacion() {
 
+		TreeMap<Relacion,List<Personal>> resul = new TreeMap<Relacion,List<Personal>>();
+		List<Personal> listaPadre = 
+		resul.put(Relacion.PADRE, new ArrayList<Personal>());
+		for(char clave: agenda.keySet()){
+			for(Contacto lista: agenda.get(clave)) {
+				if(lista instanceof Personal) {
+					switch(((Personal) lista).getRel()) {
+						case PADRE:
+							resul.get(Relacion.PADRE).add((Personal) lista);
+						
+					
+					}
+				}
+				
+		
+			}
+		}  
+
+		
 	}
 
 	/**
