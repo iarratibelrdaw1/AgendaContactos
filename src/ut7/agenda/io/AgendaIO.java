@@ -10,10 +10,21 @@ import ut7.agenda.modelo.*;
  *
  
  */
+
+/**
+ * A partir de los datos obtenidos por el método obtenerLineasDatos,
+ * cargamos todos los contactos en el parametro agenda.
+ * @param AgendaContactos agenda (donde meteremos los contactos)
+ * 
+ */
 public class AgendaIO {
 
 	public static void importar(AgendaContactos agenda) {
-
+		String[] contactos = obtenerLineasDatos();
+		for(int i=0;i<contactos.length;i++) {
+			Contacto nuevo = parsearLinea(contactos[i]);
+			agenda.añadirContacto(nuevo);
+		}
 	}
 	
 	/**

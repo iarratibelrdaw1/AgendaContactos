@@ -45,19 +45,36 @@ public class AgendaContactos {
 			agenda.put(prim, cont);
 		}
 	}
-
-	public void contactosEnLetra() {
-
+	/**
+	 * Falta comentar.	
+	 * @return int
+	 */
+	public Set<Contacto> contactosEnLetra(char letra) {
+		Set<Contacto> contactos = new HashSet<Contacto>();
+		for(char clave: agenda.keySet()){
+			for(Contacto lista: agenda.get(clave)) {
+				if(lista.getPrimeraLetra() == letra)
+					contactos.add(lista);
+			}
+		}
+		return contactos;
 	}
-
-	public void totalContactos() {
-
+	/**
+	 * Devuelve el número total de contactos en la agenda.	
+	 * @return int
+	 */
+	public int totalContactos() {
+		return agenda.keySet().size();
 	}
-
+	/**
+	 * Falta comentar.	
+	 * @return int
+	 */
 	@Override
 	public String toString() {
 
-		return null;
+		return "Agenda contactos" + "\n" +
+				;
 	}
 
 	/**
@@ -79,10 +96,20 @@ public class AgendaContactos {
 		return resul;
 
 	}
-
+	/**
+	 * Falta comentar.	
+	 * @return int
+	 */
 	public List<Personal> personalesEnLetra(char letra) {
-
-		return null;
+		ArrayList<Personal> contactoP = new ArrayList<Personal>();
+		for(char clave: agenda.keySet()){
+			for(Contacto lista: agenda.get(clave)) {
+				if(lista instanceof Personal && lista.getPrimeraLetra() == letra) {
+					contactoP.add((Personal)lista);
+				}
+			}
+		}
+		return contactoP;
 	}
 
 	/**
