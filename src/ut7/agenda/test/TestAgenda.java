@@ -6,6 +6,12 @@ import ut7.agenda.io.AgendaIO;
 import ut7.agenda.modelo.AgendaContactos;
 import ut7.agenda.modelo.Contacto;
 import ut7.agenda.modelo.Personal;
+/**
+ * Clase TestAgenda
+ * 
+ * @author Alex Calderón, Irune Arratibel, Daniel Jiménez
+ * @version 1.0
+ */
 
 public class TestAgenda {
 

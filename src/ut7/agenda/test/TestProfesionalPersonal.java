@@ -6,7 +6,13 @@ import ut7.agenda.modelo.Contacto;
 import ut7.agenda.modelo.Personal;
 import ut7.agenda.modelo.Profesional;
 import ut7.agenda.modelo.Relacion;
-
+/**
+ * Clase TestProfesionalPersonal, testea las clases Profesional y Personal
+ * 
+ * @author Alex Calderón, Irune Arratibel, Daniel Jiménez
+ * @version 1.0
+ *
+ */
 public class TestProfesionalPersonal {
 
 	public static void main(String[] args) {
