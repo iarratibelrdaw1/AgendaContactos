@@ -47,23 +47,24 @@ public class AgendaIO {
 		}
 		if(Integer.parseInt(tipo) == 2) {
 			String fecha = datos[5].trim();
-			Relacion rel = null;
-			if(datos[6].equalsIgnoreCase("PADRE")) {
+			String relacion = datos[6].trim();
+			Relacion rel = Relacion.PADRE;
+			if(relacion.equalsIgnoreCase("PADRE")) {
 				rel = Relacion.PADRE;
 			}
-			if(datos[6].equalsIgnoreCase("MADRE")) {
+			if(relacion.equalsIgnoreCase("MADRE")) {
 				rel = Relacion.MADRE;
 			}
-			if(datos[6].equalsIgnoreCase("AMIGOS")) {
+			if(relacion.equalsIgnoreCase("AMIGOS")) {
 				rel = Relacion.AMIGOS;
 			}
-			if(datos[6].equalsIgnoreCase("PAREJA")) {
+			if(relacion.equalsIgnoreCase("PAREJA")) {
 				rel = Relacion.PAREJA;
 			}
-			if(datos[6].equalsIgnoreCase("HIJO")) {
+			if(relacion.equalsIgnoreCase("HIJO")) {
 				rel = Relacion.HIJO;
 			}
-			if(datos[6].equalsIgnoreCase("HIJA")) {
+			if(relacion.equalsIgnoreCase("HIJA")) {
 				rel = Relacion.HIJA;
 			}
 			Contacto pers = new Personal(nombre, apellidos, tel, email, fecha, rel);

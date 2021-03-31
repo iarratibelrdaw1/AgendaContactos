@@ -40,7 +40,6 @@ public class AgendaContactos {
 		}
 		else {
 			HashSet<Contacto> cont = new HashSet<Contacto>();
-			agenda.put(prim, cont);
 			cont.add(c);
 			agenda.put(prim, cont);
 		}
