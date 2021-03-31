@@ -120,19 +120,19 @@ public abstract class Contacto implements Comparable<Contacto>{
 	 */
 	@Override
 	public int compareTo(Contacto o) {
-		if(this.apellidos.compareTo(o.getApellidos()) == 0) {	
-			if(this.nombre.compareTo(o.getNombre()) > 0) {
+		if(this.apellidos.compareToIgnoreCase(o.getApellidos()) == 0) {	
+			if(this.nombre.compareToIgnoreCase(o.getNombre()) > 0) {
 				return 1;
 			}
-			if(this.nombre.compareTo(o.getNombre()) < 0) {
+			if(this.nombre.compareToIgnoreCase(o.getNombre()) < 0) {
 				return -1;
 			}
 		}
 		else {
-			if(this.apellidos.compareTo(o.getApellidos()) > 0) {
+			if(this.apellidos.compareToIgnoreCase(o.getApellidos()) > 0) {
 				return 1;
 			}
-			if(this.apellidos.compareTo(o.getApellidos()) < 0) {
+			if(this.apellidos.compareToIgnoreCase(o.getApellidos()) < 0) {
 				return -1;
 			}
 		}
@@ -147,16 +147,16 @@ public abstract class Contacto implements Comparable<Contacto>{
 	public boolean equals(Object obj)
 	 {
 	 if ( this == obj) {
-	return true;
+		 return true;
 	 }
 	 if ( obj == null) {
-	return false;
+		 return false;
 	 }
 	 if(this.getClass() != obj.getClass()) {
-	return false;
+		 return false;
 	 }
 	 Contacto p = (Contacto) obj;
-	 return p.getApellidos().equalsIgnoreCase(apellidos) && p.getNombre().equalsIgnoreCase(nombre) && p.getEmail().equalsIgnoreCase(email);
+	 	return p.getApellidos().equalsIgnoreCase(apellidos) && p.getNombre().equalsIgnoreCase(nombre) && p.getEmail().equalsIgnoreCase(email);
 	 }
 
 	/**

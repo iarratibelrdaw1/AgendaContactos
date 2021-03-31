@@ -3,11 +3,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
+import java.util.TreeSet;
 
 /**
  * Clase AgendaContactos
@@ -33,13 +33,14 @@ public class AgendaContactos {
 	 */
 	public void añadirContacto(Contacto c) {
 		char prim = c.getApellidos().charAt(0);
+		prim = Character.toUpperCase(prim);
 		if(agenda.containsKey(prim)) {
 			if(!agenda.get(prim).contains(c)) {
 				agenda.get(prim).add(c);
 			}
 		}
 		else {
-			HashSet<Contacto> cont = new HashSet<Contacto>();
+			Set<Contacto> cont = new TreeSet<Contacto>();
 			cont.add(c);
 			agenda.put(prim, cont);
 		}
@@ -104,13 +105,12 @@ public class AgendaContactos {
 		ArrayList <Contacto> resul = new ArrayList<Contacto>();
 		for(char clave: agenda.keySet()){
 			for(Contacto lista: agenda.get(clave)) {
-				if(lista.getNombre().contains(texto) || lista.getApellidos().contains(texto) )
+				if(lista.getNombre().toUpperCase().contains(texto.toUpperCase()) || lista.getApellidos().toUpperCase().contains(texto.toUpperCase()) )
 					resul.add(lista);
 			}
 		}  
 		
 		return resul;
-
 	}
 	/**
 	 * Dada una letra devuelve una collecion ArrayList con contactos
@@ -119,19 +119,19 @@ public class AgendaContactos {
 	 * @return ArrayList
 	 */
 	public List<Personal> personalesEnLetra(char letra) {
-		ArrayList<Personal> contactoP = new ArrayList<Personal>();
-		for(char clave: agenda.keySet()){
-			if(clave == Character.toUpperCase(letra)) {
-				for(Contacto lista: agenda.get(clave)) {
+		letra = Character.toUpperCase(letra);
+		if(agenda.containsKey(letra)) {
+			ArrayList<Personal> contactoP = new ArrayList<Personal>();
+			if(agenda.containsKey(letra)) {
+				for(Contacto lista: agenda.get(letra)) {
 					if(lista instanceof Personal) {
 						contactoP.add((Personal)lista);
 					}
 				}
 			}
-			else
-				return null;
+			return contactoP;
 		}
-		return contactoP;
+		return null;
 	}
 
 	/**
@@ -147,7 +147,6 @@ public class AgendaContactos {
 					resul.add((Personal)lista);
 			}
 		}  
-
 		return resul;
 	}
 
@@ -157,42 +156,84 @@ public class AgendaContactos {
 	 * map es la relación  y el valor asociado, un ArrayList
 	 * de cadenas con los apellidos y nombre de todos los
 	 * contactos personales que hay en la agenda
+	 * @return 
 	 */
-	public void personalesPorRelacion() {
+	public Map<Relacion, List<String>> personalesPorRelacion() {
 
-		TreeMap<Relacion,List<Personal>> resul = new TreeMap<Relacion,List<Personal>>();
+		TreeMap<Relacion,List<String>> resul = new TreeMap<Relacion,List<String>>();
 		
-		resul.put(Relacion.PADRE, new ArrayList<Personal>());
-		resul.put(Relacion.MADRE, new ArrayList<Personal>());
-		resul.put(Relacion.AMIGOS, new ArrayList<Personal>());
-		resul.put(Relacion.PAREJA, new ArrayList<Personal>());
-		resul.put(Relacion.HIJO, new ArrayList<Personal>());
-		resul.put(Relacion.HIJA, new ArrayList<Personal>());
 		
 		for(char clave: agenda.keySet()){
 			for(Contacto lista: agenda.get(clave)) {
 				if(lista instanceof Personal) {
+					String nomb = "";
+					nomb = lista.getApellidos() + " " + lista.getNombre();
 					switch(((Personal) lista).getRel()) {
 						case PADRE:
-							resul.get(Relacion.PADRE).add((Personal) lista);
+							if(resul.containsKey(Relacion.PADRE)) {
+							resul.get(Relacion.PADRE).add(nomb);
+							}
+							else {
+								ArrayList<String> cont = new ArrayList<String>();
+								cont.add(nomb);
+								resul.put(Relacion.PADRE, cont);
+							}
+							break;
 						case MADRE:
-							resul.get(Relacion.MADRE).add((Personal) lista);
+							if(resul.containsKey(Relacion.MADRE)) {
+								resul.get(Relacion.MADRE).add(nomb);
+								}
+								else {
+									ArrayList<String> cont = new ArrayList<String>();
+									cont.add(nomb);
+									resul.put(Relacion.MADRE, cont);
+								}
+							break;
 						case AMIGOS:
-							resul.get(Relacion.AMIGOS).add((Personal) lista);
+							if(resul.containsKey(Relacion.AMIGOS)) {
+								resul.get(Relacion.AMIGOS).add(nomb);
+								}
+								else {
+									ArrayList<String> cont = new ArrayList<String>();
+									cont.add(nomb);
+									resul.put(Relacion.AMIGOS, cont);
+								}
+							break;
 						case PAREJA:
-							resul.get(Relacion.PAREJA).add((Personal) lista);
+							if(resul.containsKey(Relacion.PAREJA)) {
+								resul.get(Relacion.PAREJA).add(nomb);
+								}
+								else {
+									ArrayList<String> cont = new ArrayList<String>();
+									cont.add(nomb);
+									resul.put(Relacion.PAREJA, cont);
+								}
+							break;
 						case HIJO:
-							resul.get(Relacion.HIJO).add((Personal) lista);
+							if(resul.containsKey(Relacion.HIJO)) {
+								resul.get(Relacion.HIJO).add(nomb);
+								}
+								else {
+									ArrayList<String> cont = new ArrayList<String>();
+									cont.add(nomb);
+									resul.put(Relacion.HIJO, cont);
+								}
+							break;
 						case HIJA:
-							resul.get(Relacion.HIJA).add((Personal) lista);
+							if(resul.containsKey(Relacion.HIJA)) {
+								resul.get(Relacion.HIJA).add(nomb);
+								}
+								else {
+									ArrayList<String> cont = new ArrayList<String>();
+									cont.add(nomb);
+									resul.put(Relacion.HIJA, cont);
+								}
+							break;
 					}
 				}
-				
-		
 			}
-		}  
-
-		
+		}
+		return resul;  
 	}
 
 	/**
@@ -202,16 +243,8 @@ public class AgendaContactos {
 	 * @return List<Personal> con los contactos personales ordenados
 	 */
 	public List<Personal> personalesOrdenadosPorFechaNacimiento(char letra) {
-		ArrayList<Personal> ord = new ArrayList<Personal>();
-		Set<Contacto> contactos = agenda.get(letra);
-		Iterator<Contacto> it = contactos.iterator();
-		while(it.hasNext()) {
-			Contacto c = it.next();
-			if(c instanceof Personal) {
-				Personal p = (Personal) c;
-				ord.add(p);
-			}
-		}
+		List<Personal> ord = personalesEnLetra(letra);
+			
 		Collections.sort(ord, new Comparator<Personal>() {
 				public int compare(Personal p1, Personal p2)  {
 					if(p1.getFecha_nac().compareTo(p2.getFecha_nac()) > 0) {
@@ -223,9 +256,7 @@ public class AgendaContactos {
 					return 0;
 				}
 			
-		});
-
-			
+		});			
 		return ord;
 	}
 

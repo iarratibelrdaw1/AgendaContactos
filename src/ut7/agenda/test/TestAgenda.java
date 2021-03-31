@@ -4,9 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import ut7.agenda.io.AgendaIO;
-import ut7.agenda.modelo.AgendaContactos;
-import ut7.agenda.modelo.Contacto;
-import ut7.agenda.modelo.Personal;
+import ut7.agenda.modelo.*;
 /**
  * Clase TestAgenda
  * 
