@@ -24,7 +24,11 @@ public class Profesional extends Contacto {
 	
 	public Profesional(String nombre, String apellidos, String telefono, String email, String nombreEmpresa) {
 		super(nombre, apellidos, telefono, email);
-		this.nombreEmpresa = nombreEmpresa;
+		this.nombreEmpresa = "";
+		String[] temp = nombreEmpresa.split(" ");
+		for(String lista: temp) {
+			this.nombreEmpresa += lista.substring(0,1).toUpperCase() + lista.substring(1) + " ";
+		}
 	}
 
 	/**

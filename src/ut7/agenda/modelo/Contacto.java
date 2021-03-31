@@ -93,9 +93,9 @@ public abstract class Contacto implements Comparable<Contacto>{
 	 * @return String con texto
 	 */
 	@Override
-	public String toString() {
+	public String toString() { 
 		return getApellidos() + ", " + getNombre() + " (" + getClass().getSimpleName().toUpperCase() + ")" + "\n" +
-			   "Tfno: " + getTelefono() + "   |    email: " + getEmail() + "\n";
+			   "Tfno: " + getTelefono() + " |  email: " + getEmail() + "\n";
 	}
 	
 	/**
@@ -120,21 +120,21 @@ public abstract class Contacto implements Comparable<Contacto>{
 	 */
 	@Override
 	public int compareTo(Contacto o) {
-		int resultadoA = this.apellidos.compareTo(o.getApellidos());
-		if(resultadoA == 0) {
-			int resultadoN = this.nombre.compareTo(o.getNombre());
-			if(resultadoN > 0) {
+		if(this.apellidos.compareTo(o.getApellidos()) == 0) {	
+			if(this.nombre.compareTo(o.getNombre()) > 0) {
 				return 1;
 			}
-			else if(resultadoN < 0) {
+			if(this.nombre.compareTo(o.getNombre()) < 0) {
 				return -1;
 			}
 		}
-		else if(resultadoA > 0) {
-			return 1;
-		}
 		else {
-			return -1;
+			if(this.apellidos.compareTo(o.getApellidos()) > 0) {
+				return 1;
+			}
+			if(this.apellidos.compareTo(o.getApellidos()) < 0) {
+				return -1;
+			}
 		}
 		return 0;
 	}
