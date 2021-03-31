@@ -32,7 +32,7 @@ public class AgendaContactos {
 	 * @param Contacto c (el contacto a añadir)
 	 */
 	public void añadirContacto(Contacto c) {
-		char prim = c.getNombre().charAt(0);
+		char prim = c.getApellidos().charAt(0);
 		if(agenda.containsKey(prim)) {
 			if(!agenda.get(prim).contains(c)) {
 				agenda.get(prim).add(c);
@@ -46,15 +46,17 @@ public class AgendaContactos {
 		}
 	}
 	/**
-	 * Falta comentar.	
-	 * @return int
+	 * Dado una letra devuelve un conjunto(Set) de contactos de esa letra
+	 * @param char letra	
+	 * @return Set conjuntos de contacos.
 	 */
 	public Set<Contacto> contactosEnLetra(char letra) {
 		Set<Contacto> contactos = new HashSet<Contacto>();
 		for(char clave: agenda.keySet()){
 			for(Contacto lista: agenda.get(clave)) {
-				if(lista.getPrimeraLetra() == letra)
-					contactos.add(lista);
+				if(lista.getPrimeraLetra() == Character.toUpperCase(letra)) {
+				contactos.add(lista);
+				}
 			}
 		}
 		return contactos;
@@ -64,17 +66,32 @@ public class AgendaContactos {
 	 * @return int
 	 */
 	public int totalContactos() {
-		return agenda.keySet().size();
+		ArrayList<Contacto> valores = new ArrayList<Contacto>();
+		for(char clave: agenda.keySet()){
+			for(Contacto lista: agenda.get(clave)) {
+				valores.add(lista);
+			}
+		}
+		return valores.size();
 	}
 	/**
-	 * Falta comentar.	
-	 * @return int
+	 * Representación textual de la agenda de contactos.	
+	 * @return String
 	 */
 	@Override
 	public String toString() {
-
-		return "Agenda contactos" + "\n" +
-				;
+		String salida = "";
+		String contacto = "";
+		 salida = "AGENDA DE CONTACTOS" + "\n\n";
+		 for(char clave: agenda.keySet()){
+			 salida += clave + " (" + contactosEnLetra(clave).size() + " contacto/s" + ")\n" +
+					 	"-----------------------\n";
+						contacto = contactosEnLetra(clave).toString().replace("[", "").replace("]", "") + "\n";
+						
+			 salida += contacto.replace("\n, ", "\n\n") + "\n";
+		}
+		 salida += " " + "(" + totalContactos() + " contacto/s" + ")" + "\n";
+		 return salida;
 	}
 
 	/**
@@ -97,17 +114,23 @@ public class AgendaContactos {
 
 	}
 	/**
-	 * Falta comentar.	
-	 * @return int
+	 * Dada una letra devuelve una collecion ArrayList con contactos
+	 * personales que contengan esa letra.	
+	 * @param char letra
+	 * @return ArrayList
 	 */
 	public List<Personal> personalesEnLetra(char letra) {
 		ArrayList<Personal> contactoP = new ArrayList<Personal>();
 		for(char clave: agenda.keySet()){
-			for(Contacto lista: agenda.get(clave)) {
-				if(lista instanceof Personal && lista.getPrimeraLetra() == letra) {
-					contactoP.add((Personal)lista);
+			if(clave == Character.toUpperCase(letra)) {
+				for(Contacto lista: agenda.get(clave)) {
+					if(lista instanceof Personal) {
+						contactoP.add((Personal)lista);
+					}
 				}
 			}
+			else
+				return null;
 		}
 		return contactoP;
 	}
