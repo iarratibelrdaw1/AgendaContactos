@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
+import java.util.Iterator;
 
 /**
  * Clase AgendaContactos
@@ -52,7 +53,7 @@ public class AgendaContactos {
 	 */
 	public Set<Contacto> contactosEnLetra(char letra) {
 		Set<Contacto> contactos = new HashSet<Contacto>();
-		for(char clave: agenda.keySet()){
+		for(char clave: agenda.keySet()){ 
 			for(Contacto lista: agenda.get(clave)) {
 				if(lista.getPrimeraLetra() == Character.toUpperCase(letra)) {
 				contactos.add(lista);
@@ -78,21 +79,28 @@ public class AgendaContactos {
 	 * Representación textual de la agenda de contactos.	
 	 * @return String
 	 */
-	@Override
 	public String toString() {
-		String salida = "";
-		String contacto = "";
-		 salida = "AGENDA DE CONTACTOS" + "\n\n";
-		 for(char clave: agenda.keySet()){
-			 salida += clave + " (" + contactosEnLetra(clave).size() + " contacto/s" + ")\n" +
-					 	"-----------------------\n";
-						contacto = contactosEnLetra(clave).toString().replace("[", "").replace("]", "") + "\n";
-						
-			 salida += contacto.replace("\n, ", "\n\n") + "\n";
+		StringBuilder sb = new StringBuilder(
+				"Agenda de contactos".toUpperCase() + "\n\n");
+
+		Set<Map.Entry<Character, Set<Contacto>>> entradas = agenda.entrySet();
+		Iterator<Map.Entry<Character, Set<Contacto>>> it = entradas.iterator();
+		while (it.hasNext()) {
+			Map.Entry<Character, Set<Contacto>> entrada = it.next();
+			Character letra = entrada.getKey();
+			Set<Contacto> contactosEnLetra = entrada.getValue();
+			sb.append(letra + " (" + contactosEnLetra(letra).size()
+					+ " contacto/s)\n---------------\n");
+			for (Contacto c : contactosEnLetra) {
+				sb.append(c.toString() + "\n");
+			}
+			sb.append("\n");
+
 		}
-		 salida += " " + "(" + totalContactos() + " contacto/s" + ")" + "\n";
-		 return salida;
+		sb.append(" (" + totalContactos() + " contacto/s)\n");
+		return sb.toString();
 	}
+
 
 	/**
 	 * Devuelve un ArrayList con todos los contactos que incluyen 
@@ -209,7 +217,7 @@ public class AgendaContactos {
 									resul.put(Relacion.PAREJA, cont);
 								}
 							break;
-						case HIJO:
+						case HIJO:  
 							if(resul.containsKey(Relacion.HIJO)) {
 								resul.get(Relacion.HIJO).add(nomb);
 								}
